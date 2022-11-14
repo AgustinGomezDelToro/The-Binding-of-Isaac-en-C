@@ -8,9 +8,9 @@
 
 
 
-/// \def Create an Item
+/// \def Create a monster
 /// \return
-Item* createItem(){
+Item* createMonster(){
     Item* a= malloc(sizeof(Item));
     printf("Entrer le nom du monstre : ");
     scanf("%s",a->nameItem);
@@ -25,20 +25,20 @@ Item* createItem(){
     return a;
 }
 
-/// \def Print an Item
-/// \param a Take an Item
-void printItem(Item* a){
+/// \def Print a monster
+/// \param a Take a monster
+void printMonster(Item* a){
     printf("name=%s\nhpMax=%.1f\nshoot=%i\nss=%i\nflight=%i\n",a->nameItem,a->hpMax,a->shoot,a->ss,a->flight);
 }
 /// \def Free memory
 /// \param a
-void freeItem(Item* a){
+void freeMonster(Item* a){
     free(a);
 }
 
-/// \def Add item to a file
+/// \def Add a monster to a file
 /// \param a
-void addItemToFile(Item* a, char* file){
+void addMonsterToFile(Item* a, char* file){
     FILE* f = fopen(file,"r+");
     int nbItems = 0;
     if (f != NULL){
@@ -69,8 +69,8 @@ void addItemToFile(Item* a, char* file){
     fclose(f);
 }
 
-/// \def Modify an Item in the monster.mtbob file
-void modifyItem() {
+/// \def Modify a monster in the monster.mtbob file
+void modifyMonster() {
     system("clear");
     FILE *f = fopen(FILE_1, "r+");  //ouverture du fichier monster.mtbob
     FILE *f_temp = fopen(TEMP_FILE, "w+"); //ouverture du fichier temporaire
@@ -112,7 +112,7 @@ void modifyItem() {
                     printf("\nL'objet permet-il de voler? ");
                     scanf("%d", &monster_temp->flight);
                 }
-                addItemToFile(monster_temp, TEMP_FILE);
+                addMonsterToFile(monster_temp, TEMP_FILE);
                 i += 1;
             }
         }
@@ -121,7 +121,7 @@ void modifyItem() {
     }
     fclose(f);
     fclose(f_temp);
-    freeItem(monster_temp);
+    freeMonster(monster_temp);
     remove(FILE_1);
     rename(TEMP_FILE, FILE_1);
     if(found == 0){
@@ -131,8 +131,8 @@ void modifyItem() {
     }
 }
 
-/// \def Delete an Item
-void deleteItem() {
+/// \def Delete a monster
+void deleteMonster() {
     system("clear");
     FILE *f = fopen(FILE_1, "r+");  //ouverture du fichier monster.mtbob
     FILE *f_temp = fopen(TEMP_FILE, "w+"); //ouverture du fichier temporaire
@@ -162,7 +162,7 @@ void deleteItem() {
                 fscanf(f, "ss=%d\n", &monster_temp->ss);
                 fscanf(f, "flight=%d\n", &monster_temp->flight);
                 if (strcmp(nameItem, monster_temp->nameItem) != 0) {
-                    addItemToFile(monster_temp, TEMP_FILE);
+                    addMonsterToFile(monster_temp, TEMP_FILE);
                 } else{
                     found = 1;
                 }
@@ -174,7 +174,7 @@ void deleteItem() {
     }
     fclose(f);
     fclose(f_temp);
-    freeItem(monster_temp);
+    freeMonster(monster_temp);
     remove(FILE_1);
     rename(TEMP_FILE, FILE_1);
     if(found == 0){
@@ -184,8 +184,8 @@ void deleteItem() {
     }
 }
 
-///\def Print all the Items available
-void printAllItem(){
+///\def Print all monsters available
+void printAllMonster(){
     FILE* f = fopen(FILE_1,"r+");
     int nbItems = 0;
     int i = 0;
@@ -198,14 +198,14 @@ void printAllItem(){
             rewind(f); //on retourne au début du fichier
             fscanf(f, "{%d}\n", &nbItems); // on récupère le nombre d'objets
             while (i < nbItems){
-                printf("voici tous les objets disponibles : \n");
+                //printf("voici tous les objets disponibles : \n");
                 fscanf(f, "---\n");
                 fscanf(f, "name=%s\n", monster_temp->nameItem);
                 fscanf(f, "hpMax=%f\n", &monster_temp->hpMax);
                 fscanf(f, "shoot=%d\n", &monster_temp->shoot);
                 fscanf(f, "ss=%d\n", &monster_temp->ss);
                 fscanf(f, "flight=%d\n", &monster_temp->flight);
-                printItem(monster_temp);
+                printMonster(monster_temp);
                 printf("\n");
                 i += 1;
             }
@@ -214,5 +214,5 @@ void printAllItem(){
         printf("Error in openning file\n");
     }
     fclose(f);
-    freeItem(monster_temp);
+    freeMonster(monster_temp);
 }

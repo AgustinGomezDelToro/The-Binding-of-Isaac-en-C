@@ -3,7 +3,7 @@
 *
 *  Made by : MALLIA Jonathan
 *
-*  Description : 
+*  Description :
 */
 
 #include "sources/H/menu.h"
@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]){
         do{
             printf("1 - Interface des Pieces\n");
             printf("2 - Interfaces des Items\n");
-            printf("3 - Interfaces des Items\n");
+            printf("3 - Interfaces des monstres\n");
             printf("4 - Fermer le programme\n");
             printf("Faites votre choix et appuyé sur entrer : ");
             scanf("%d",&choice);

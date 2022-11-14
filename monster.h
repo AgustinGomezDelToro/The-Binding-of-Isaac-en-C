@@ -5,7 +5,7 @@ struct Item {
     char nameItem[20];
     float hpMax;
 //    float shield;
-  //  float dmg;
+    //  float dmg;
     int shoot; //bool pour les tirs
     int ss; //bool pour les tirs spectrals
     int flight; //bool pour le vol
@@ -13,18 +13,18 @@ struct Item {
 
 typedef struct Item Item;
 
-Item* createItem();
+Item* createMonster();
 
-void printItem(Item* obj);
+void printMonster(Item* obj);
 
-void modifyItem();
+void modifyMonster();
 
-void freeItem(Item* obj);
+void freeMonster(Item* obj);
 
-void addItemToFile(Item* obj, char* file);
+void addMonsterToFile(Item* obj, char* file);
 
-void deleteItem();
+void deleteMonster();
 
-void printAllItem();
+void printAllMonster();
 
 #endif
