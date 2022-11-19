@@ -196,8 +196,8 @@ void printAllMonster(){
         }else{
             rewind(f); //on retourne au début du fichier
             fscanf(f, "{%d}\n", &nbItems); // on récupère le nombre d'objets
+            printf("voici tous les objets disponibles : \n");
             while (i < nbItems){
-                printf("voici tous les objets disponibles : \n");
                 fscanf(f, "---\n");
                 fscanf(f, "name=%s\n", monster_temp->nameItem);
                 fscanf(f, "hpMax=%f\n", &monster_temp->hpMax);

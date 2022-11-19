@@ -1,4 +1,4 @@
-{3}
+{4}
 ---
 name=OMchampiondumonde
 hpMax=23.0
@@ -17,4 +17,10 @@ hpMax=1.0
 shoot=1
 ss=1
 flight=1
+---
+name=jojo
+hpMax=5.0
+shoot=5
+ss=5
+flight=5
 ---
