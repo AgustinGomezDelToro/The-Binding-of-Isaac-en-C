@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #define FILE_1 "ressources/piece.rtbob"
 #define TEMP_FILE "ressources/temp.rtbob"
@@ -59,7 +60,7 @@ void printPiece(Piece* a,int mode){
     }else{
         for(int i = 0; i < a->height; i+=1){
             if(i==0){
-                printf("  A B C D E F G H I J K L M O N\n");
+                printf("  A B C D E F G H I J K L M N O\n");
             } 
             printf("%d ",i);
             for(int j = 0; j < a->width; j+=1){
@@ -104,28 +105,37 @@ void modifyPiece(int id){
             cmpt = 1;
         }
         if(s->id==id){
-            printPiece(s,1);
-            int xx= 0;
-            char y;
+            int xx = 0;
+            char y = 0;
             char value;
 
-            printf("Entrer les coordonnées(0 X):");
-            scanf("%d %c",&xx,&y);
-            printf("Entrer la valeur:");
-            getchar();
-            scanf("%c",&value);
+            while (value != 'N' && value != 'n'){
+                do{
+                    system("clear");
+                    printPiece(s,1);
+                    printf("W = mur  ;  R = rocher  ; G = gap ;\nD = porte ; H = vie/bouclier  ;  S = pic\n");
 
-            if(y=='N'){
-                y+=1;
-            }else if(y=='O'){
-                y-=1;
+                    do{
+                        printf("Entrer les coordonnées(0 X):");
+                        scanf("%d %c",&xx,&y);
+                    }while(xx <0 || xx>8 || y<'A' || y>'O');
+
+                    printf("Entrer la valeur:");
+                    getchar();
+                    scanf("%c",&value);
+                }while(value != 'W' && value != 'R' && value != 'G' && value != 'D' && value != 'H' && value != 'S');
+
+                int a = placeAlphabet(y);
+                s->piece[xx][a-1]= value;
+                system("clear");
+                printf("Piece n°:%d, modifiée.\n\n",s->id);
+                printf("Voulez-vous continuer ? [O/n]:");
+                getchar();
+                scanf("%c",&value);
+                system("clear");
             }
-
-            int a = placeAlphabet(y);
-            s->piece[xx][a-1]= value;
             system("clear");
             printPiece(s,0);
-            printf("Piece n°:%d, modifiée.\n\n",s->id);
         }
         addPieceToFile(s,TEMP_FILE);
         freePiece(s);
@@ -170,7 +180,7 @@ void printAllPieces(){
 /// \def Ajoute la nouvelle piece au fichier
 /// \param p
 void addPieceToFile(Piece* p, char* file){
-    FILE* f  = fopen(file, "r+");
+    FILE* f  = fopen(file, "rw+");
 
     int nbrSalles = 0;
     int id = 0;
@@ -181,6 +191,7 @@ void addPieceToFile(Piece* p, char* file){
         fseek(f,0, SEEK_END);
         if(ftell(f) == 0){  //Premier passage ici si le fichier est vide
             fprintf(f,"{%d}\n",nbrSalles += 1);
+            fprintf(f,"\n");
 
             fprintf(f,"[%d|%d]%d\n",p->height, p->width, p->id);
 
@@ -192,7 +203,7 @@ void addPieceToFile(Piece* p, char* file){
             }
         }else{  //Si le fichier contient déja une ou plusieur pieces on rentre ici
             rewind(f);  // On remonte au début du fichier
-            fscanf(f,"{%d}\n",&nbrSalles);  // On récupère le nombre de salles
+            fscanf(f,"{%d}",&nbrSalles);  // On récupère le nombre de salles
             fscanf(f,"[%d|%d]%d\n",&p->height, &p->width, &id);  // On récupère le nombre de salles
             fseek(f,0,SEEK_END);    // On revient a la fin du fichier ppour ecrire la nouvelle salle
 
@@ -211,15 +222,14 @@ void addPieceToFile(Piece* p, char* file){
                 }
                 fprintf(f,"\n");
             }
-
-            fseek(f,0,SEEK_SET);    // On revient en haut du fichier
-            fprintf(f,"{%d}\n",nbrSalles += 1); // Et on met à jour le nombre de salles
+            rewind(f);    // On revient en haut du fichier
+            nbrSalles = nbrSalles + 1;
+            fprintf(f,"{%d}\n",nbrSalles); // Et on met à jour le nombre de salles
         }
-        if(test==0){
-            //printf("Piece ajoutée.\n");
-            result("Piece ajoutée.");
-        }
+        system("clear");
+        result("Piece ajoutée.");
     }else{
+        system("clear");
         printf("Error. %s\n",file);
     }
 
@@ -321,6 +331,52 @@ int placeAlphabet(char lettre){
         //printf("%d\n",cmptInt);
     }
     return cmptInt;
+}
+
+/// @brief Retourne le nombre de piece dans le fichier
+/// @return 
+int getNumberPieces(){
+    FILE* f = fopen(FILE_1, "r");
+    int nbrSalles=0;
+    fscanf(f,"{%d}\n",&nbrSalles);
+
+    return nbrSalles;
+}
+
+/// @brief Retourne un tableau de pieces
+/// @return 
+Piece* getAllPieces(){
+
+    FILE* f = fopen(FILE_1, "r");
+    int nbrSalles=0;
+    fscanf(f,"{%d}\n",&nbrSalles);
+
+    Piece* pieces = malloc(nbrSalles * sizeof(Piece));
+
+    for(int i = 0; i<nbrSalles ;i+=1){
+        Piece* s = createPiece();
+        fscanf(f,"[%d|%d]%d\n",&s->height, &s->width, &s->id);
+        // Lire la matrice dans le fichier
+        int x=0;
+        int cmpt = 1;
+        char c;
+        //On recupere le tableau 
+        for (int j = 0; j < s->height; j+=1) {  // Ligne par ligne (le curseur bouge tt seul)      
+            while ((c = fgetc(f)) != '\n') {    // On lit charactere par charactere jusqua la fin de la ligne ATTENTION:Les espace sont compté
+                if(cmpt%2 !=0){                 // Donc il faut esquiver les espaces du fichier
+                    s->piece[j][x] = c;         // On stock le tableau en mémoire
+                    x+=1;
+                }
+                cmpt+=1;
+            }
+            x=0;
+            cmpt = 1;
+        }
+        freePiece(s);
+    }
+    fclose(f);
+
+    return pieces;
 }
 
 void result(char* result){
