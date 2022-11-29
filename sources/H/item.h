@@ -7,10 +7,9 @@
 */
 
 #ifndef ITEM_H
-
 #define ITEM_H
 
-struct Item {
+typedef struct Item {
     char nameItem[20];
     float hpMax;
     float shield;
@@ -18,9 +17,7 @@ struct Item {
     int ps; //bool pour les tirs perçants
     int ss; //bool pour les tirs spectrals
     int flight; //bool pour le vol
-};
-
-typedef struct Item Item;
+} Item;
 
 Item* createItem();
 
@@ -35,5 +32,11 @@ void addItemToFile(Item* obj, char* file);
 void deleteItem();
 
 void printAllItem();
+
+int foundItem(char nameItem[20]);
+
+float checkFloat();
+
+int checkInt();
 
 #endif
