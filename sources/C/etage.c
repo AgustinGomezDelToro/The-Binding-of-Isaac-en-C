@@ -23,6 +23,8 @@ Etage *createMap()
         }
     }
 
+    e->Idsalles = malloc(sizeof(int) * 14);
+
     return e;
 }
 
@@ -37,10 +39,12 @@ int randomId(Etage *e, int maxSalles)
         return 0;
     }
 
+    int id = 0;
     while (i < 10)
-    {
-        int id = (rand() % maxSalles) + 1; 
+    {   
+        id = 1 + rand() % maxSalles; 
         int existe = testId(e, id);
+        //printf("%d %d\n",id,existe);
         if (existe != 1)
         {
             e->Idsalles[i] = id;

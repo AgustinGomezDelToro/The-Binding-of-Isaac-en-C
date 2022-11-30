@@ -9,13 +9,11 @@
 #include "sources/H/menu.h"
 #include <stdlib.h>
 #include <stdio.h>
-
 int main(int argc, char const *argv[]){
     int choice = 0;
     system("clear");
     while (choice != -1)
     {
-        
         do{
             //system("clear");
             printf("1 - Interface des Pieces\n");
@@ -26,7 +24,6 @@ int main(int argc, char const *argv[]){
             printf("Faites votre choix et appuyé sur entrer : ");
             scanf("%d",&choice);
         }while(choice<=0 || choice>5);
-        int id=0;
         switch (choice) {
             case 1:
                 pieceMain();

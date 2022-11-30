@@ -6,7 +6,7 @@
 #define ROWS 15
 
 struct Etage {
-    int Idsalles[14];
+    int* Idsalles;
     int** etage;
     int width;
     int height;

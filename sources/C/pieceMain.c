@@ -30,7 +30,7 @@ void pieceMain(){
         } while (choice <= '0' || choice > '5');
         int id = 0;
         switch (choice) {
-            case '1': ;
+            case '1': 
                 system("clear");
                 Piece *a = createPiece();
                 addPieceToFile(a, file);

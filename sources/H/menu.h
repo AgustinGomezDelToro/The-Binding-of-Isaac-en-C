@@ -4,6 +4,6 @@
 void pieceMain();
 void itemMain();
 void monsterMain();
-void etageMain(); // On passe en argument un tableau de pieces
+void etageMain(); 
 
-#endif // MACRO
+#endif
