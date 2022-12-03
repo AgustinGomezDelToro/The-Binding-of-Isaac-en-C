@@ -4,8 +4,6 @@
 struct Monster {
     char nameItem[20];
     float hpMax;
-//    float shield;
-  //  float dmg;
     int shoot; //bool pour les tirs
     int ss; //bool pour les tirs spectrals
     int flight; //bool pour le vol
@@ -26,5 +24,8 @@ void addMonsterToFile(Monster* obj, char* file);
 void deleteMonster();
 
 void printAllMonster();
+
+int foundMonster(char nameItem[20]);
+
 
 #endif

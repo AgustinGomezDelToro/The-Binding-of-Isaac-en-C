@@ -499,7 +499,8 @@ int checkInt() {
             }
             i += 1;
         }
-        if (testChar == 1 || neg > 0 || point > 0) { //si on a entré des caractères, un nombre négatif ou un nombre à virgule
+        if (testChar == 1 || neg > 0 ||
+            point > 0) { //si on a entré des caractères, un nombre négatif ou un nombre à virgule
             printf("Erreur: Veuillez entrer un nombre entier: "); //on redemande de entrer un nombre
         } else {
             nb = atoi(str); //on convertit la chaîne de caractères en int

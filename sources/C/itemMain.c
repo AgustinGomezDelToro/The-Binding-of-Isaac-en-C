@@ -50,7 +50,6 @@ void itemMain(){
                 break;
             case 5:
                 choice = -1;
-                system("clear");
                 break;
         }
     }

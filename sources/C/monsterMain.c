@@ -49,6 +49,7 @@ void monsterMain(){
                 printAllMonster();
                 break;
             case 5:
+                system("clear");
                 choice = -1;
                 break;
         }
