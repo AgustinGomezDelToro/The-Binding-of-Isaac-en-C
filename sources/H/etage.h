@@ -1,6 +1,7 @@
 #ifndef ETAGE_H
 
 #define ETAGE_H
+#include "../H/piece.h"
 
 #define COLS 15
 #define ROWS 15
@@ -27,5 +28,7 @@ void placerSalles(Etage* e); // Permet de placer les salle dans l'étages: le pl
 void printEtage(Etage* e);
 
 void freeEtage(Etage* e);
+
+void randomMonster(Piece* p);
 
 #endif

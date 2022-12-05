@@ -22,9 +22,7 @@ Etage *createMap()
             e->etage[i][j] = 0;
         }
     }
-
     e->Idsalles = malloc(sizeof(int) * 14);
-
     return e;
 }
 
@@ -184,4 +182,8 @@ int randomDirections(){
     }
     //printf("Position: %s\n",sortie);
     return id;
+}
+
+void randomMonster(Piece* p){
+
 }

@@ -70,7 +70,6 @@ void printPiece(Piece* a,int mode){
             printf("\n");
         }         
     }
-
 }
 
 /// \def Modifie une piece
@@ -343,15 +342,13 @@ int getNumberPieces(){
     return nbrSalles;
 }
 
-/// @brief Retourne un tableau de pieces
+/// @brief Retourne une des pieces
 /// @return 
-Piece* getAllPieces(){
+Piece* getPiece(int id){
 
-    FILE* f = fopen(FILE_1, "r");
+    FILE* f = fopen(FILE_1, "r+");
     int nbrSalles=0;
     fscanf(f,"{%d}\n",&nbrSalles);
-
-    Piece* pieces = malloc(nbrSalles * sizeof(Piece));
 
     for(int i = 0; i<nbrSalles ;i+=1){
         Piece* s = createPiece();
@@ -372,11 +369,13 @@ Piece* getAllPieces(){
             x=0;
             cmpt = 1;
         }
+        if(s->id==id){
+            fclose(f);
+            return s;
+        }
         freePiece(s);
     }
     fclose(f);
-
-    return pieces;
 }
 
 void result(char* result){

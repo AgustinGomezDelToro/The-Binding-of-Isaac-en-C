@@ -32,7 +32,7 @@ void deletePiece(int id);       // FAIT
 
 void printAllPieces();          //FAIT
 
-Piece* getAllPieces(); //FAIT
+Piece* getPiece(int id); //FAIT
 
 int getNumberPieces();  //FAIT
 
