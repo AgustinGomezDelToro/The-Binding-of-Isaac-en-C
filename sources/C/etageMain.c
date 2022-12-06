@@ -4,6 +4,7 @@
 #include "../H/etage.h"
 #include "../H/menu.h"
 #include "../H/piece.h"
+#include "../H/item.h"
 
 void etageMain(){
     //printf("On est la");
@@ -24,16 +25,21 @@ void etageMain(){
             tabPieces[i] = spawner;
         }else if (e->Idsalles[i] == -2)
         {
-            Piece* itemRoom = createPiece();
+            Piece *itemRoom = createPiece();
+            itemRoom->piece[itemRoom->height/2][itemRoom->width/2] = 'I';
+            Item * iR = randomItem();
             tabPieces[i] = itemRoom;
+
         }else if (e->Idsalles[i] == -3)
         {
             Piece* boss = createPiece();
             tabPieces[i] = boss;
         }else if (e->Idsalles[i] == -4)
         {
-            Piece* itemRoom = createPiece();
-            tabPieces[i] = itemRoom;
+            Piece* itemRoomBonus = createPiece();
+            itemRoomBonus->piece[itemRoomBonus->height/2][itemRoomBonus->width/2] = 'I';
+            Item * iR = randomItem();
+            tabPieces[i] = itemRoomBonus;
         }else{
             Piece* toAdd = getPiece(e->Idsalles[i]);
             tabPieces[i] = toAdd;
@@ -43,6 +49,8 @@ void etageMain(){
     // Maintenant, on va recupérer et mettre en mémoire les salles qui on été tirer au sort    
     //On affiche l'etage + ses informations
     printEtage(e);
-    printPiece(tabPieces[10],0);
+    printPiece(tabPieces[11],0);
+    printPiece(tabPieces[12],0);
+    printPiece(tabPieces[13],0);
     //freeEtage(e);
 }
