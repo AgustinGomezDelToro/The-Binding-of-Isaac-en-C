@@ -385,6 +385,7 @@ void addItemToFile(Item* a, char* file) {
 }
 /// \def Recherche si un objet existe dans le fichier
 /// \param a L'objet à rechercher
+/// \return 1 si l'objet existe, 0 sinon
 int foundItem(char nameItem[20]) {
     FILE *f = fopen(FILE_1, "r");
     int nbItems = 0;
@@ -474,6 +475,7 @@ float checkFloat() {
 }
 
 /// \def Fonction qui permet de vérifier si on entre bien un nombre entier
+/// \return Le nombre entier entré si c'est bon, sinon 0
 int checkInt() {
     int i;
     int testChar;
@@ -508,4 +510,53 @@ int checkInt() {
         }
     }
     return nb; //on retourne le nombre
+}
+
+/// \def Fonction qui retourne un Item random
+/// \return Un Item random
+Item *randomItem() {
+    FILE *f = fopen(FILE_1, "r");
+    int nbItems = 0;
+    char bool[5];
+    Item *item_temp = malloc(sizeof(Item));
+    fscanf(f, "{%d}\n", &nbItems);
+    srand(time(NULL));
+    int random = 1 + rand() % nbItems; //on choisit un nombre aléatoire entre 1 et le nombre d'objets
+    for (int i = 0; i < random; i += 1 ) {
+        item_temp->hpMax = 0;
+        item_temp->shield = 0;
+        item_temp->dmg = 0;
+        item_temp->ps = 0;
+        item_temp->ss = 0;
+        item_temp->flight = 0;
+        fflush(stdin);
+        fscanf(f, "---\n");
+        fscanf(f, "name=%s\n", item_temp->nameItem);
+        fscanf(f, "hpMax=%f\n", &item_temp->hpMax);
+        fscanf(f, "shield=%f\n", &item_temp->shield);
+        fscanf(f, "dmg=%f\n", &item_temp->dmg);
+        if(fscanf(f, "ps=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                item_temp->ps = 1;
+            } else {
+                item_temp->ps = 0;
+            }
+        }
+        if(fscanf(f, "ss=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                item_temp->ss = 1;
+            } else {
+                item_temp->ss = 0;
+            }
+        }
+        if(fscanf(f, "flight=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                item_temp->flight = 1;
+            } else {
+                item_temp->flight = 0;
+            }
+        }
+    }
+    fclose(f);
+    return item_temp;
 }

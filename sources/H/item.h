@@ -39,4 +39,6 @@ float checkFloat();
 
 int checkInt();
 
+Item* randomItem();
+
 #endif
