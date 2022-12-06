@@ -179,11 +179,47 @@ void printAllPieces(){
 /// \def Ajoute la nouvelle piece au fichier
 /// \param p
 void addPieceToFile(Piece* p, char* file){
+    char save[100000];
     FILE* f  = fopen(file, "rw+");
 
     int nbrSalles = 0;
     int id = 0;
     int test;
+
+  if (fgetc(f) == EOF)
+  {
+    rewind(f);
+    fprintf(f, "{0}\n");
+  }
+  rewind(f);
+
+  int nbItems = 0;
+
+  fscanf(f, "{%d}\n", &nbrSalles);
+  rewind(f);
+
+  if (nbrSalles == 9)
+  {
+    printf("We are inside\n");
+    int c;
+    int i;
+    for (i = 0; (c = getc(f)) != EOF; i++)
+    {
+      save[i] = c;
+    }
+    for (int j = i; j > 0; j--)
+    {
+      save[j] = save[j - 1];
+    }
+    rewind(f);
+    for (int j = 0; j <= i; j++)
+    {
+      fputc(save[j], f);
+    }
+    rewind(f);
+  }
+
+  fprintf(f, "{%d}", nbrSalles);
 
     if(f != NULL) {
 
