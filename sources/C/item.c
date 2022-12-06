@@ -319,8 +319,43 @@ void printAllItem() {
 /// \def Ajout d'un objet dans le fichier
 /// \param a L'objet à ajouter
 void addItemToFile(Item* a, char* file) {
+    char save[100000];
     FILE* f = fopen(file,"r+"); //ouverture du fichier item.itbob
+    
+    if (fgetc(f) == EOF)
+  {
+    rewind(f);
+    fprintf(f, "{0}\n---\n");
+  }
+  rewind(f);
+    
     int nbItems = 0;
+ fscanf(f, "{%d}\n", &nbItems);
+  rewind(f);
+
+  if (nbItems == 9)
+  {
+    printf("We are inside\n");
+    int c;
+    int i;
+    for (i = 0; (c = getc(f)) != EOF; i++)
+    {
+      save[i] = c;
+    }
+    for (int j = i; j > 0; j--)
+    {
+      save[j] = save[j - 1];
+    }
+    rewind(f);
+    for (int j = 0; j <= i; j++)
+    {
+      fputc(save[j], f);
+    }
+    rewind(f);
+  }
+
+  fprintf(f, "{%d}", nbItems);
+
     if (f != NULL) {
         fseek(f,0, SEEK_END); //on se place à la fin du fichier
         if(ftell(f) == 0) {  //Premier passage ici si le fichier est vide
