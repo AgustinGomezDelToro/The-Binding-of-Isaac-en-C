@@ -3,8 +3,8 @@
 #define ETAGE_H
 #include "../H/piece.h"
 
-#define COLS 15
-#define ROWS 15
+#define COLS 20
+#define ROWS 20
 
 struct Etage {
     int* Idsalles;
@@ -29,6 +29,7 @@ void printEtage(Etage* e);
 
 void freeEtage(Etage* e);
 
-void randomMonster(Piece* p);
+int randomNbMonster();
 
+int* randomCoordonnee();
 #endif

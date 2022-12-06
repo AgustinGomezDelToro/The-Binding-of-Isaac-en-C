@@ -193,8 +193,6 @@ void addPieceToFile(Piece* p, char* file){
   }
   rewind(f);
 
-  int nbItems = 0;
-
   fscanf(f, "{%d}\n", &nbrSalles);
   rewind(f);
 

@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #define FILE_1 "ressources/item.itbob"
 #define TEMP_FILE "ressources/item_temp.itbob"
@@ -327,11 +328,11 @@ void addItemToFile(Item* a, char* file) {
     rewind(f);
     fprintf(f, "{0}\n---\n");
   }
-  rewind(f);
+    rewind(f);
     
     int nbItems = 0;
- fscanf(f, "{%d}\n", &nbItems);
-  rewind(f);
+    fscanf(f, "{%d}\n", &nbItems);
+    rewind(f);
 
   if (nbItems == 9)
   {

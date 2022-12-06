@@ -505,7 +505,6 @@ int foundMonster(char nameItem[20])
   return 0;
 }
 
-
 Monster* randomMonster() {
   FILE* f = fopen(FILE_1,"r");
     int nbItems = 0;

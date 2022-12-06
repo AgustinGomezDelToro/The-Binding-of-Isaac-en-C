@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include "string.h"
 #include "../H/etage.h"
+#include "../H/piece.h"
 
-#define COLS 15
-#define ROWS 15
+#define COLS 20
+#define ROWS 20
 
 Etage *createMap()
 {
@@ -182,4 +183,18 @@ int randomDirections(){
     }
     //printf("Position: %s\n",sortie);
     return id;
+}
+
+int randomNbMonster(){
+    int nbrMonster = rand() % 6;
+    return nbrMonster;
+}
+
+int* randomCoordonnee(Piece* p){
+    int* coor = malloc(sizeof(int)*2);
+    int x = 1 + rand() % (p->height-1);
+    coor[0] = x;
+    int y = 1 + rand() % (p->width-1);
+    coor[1] = y;
+    return coor;
 }
