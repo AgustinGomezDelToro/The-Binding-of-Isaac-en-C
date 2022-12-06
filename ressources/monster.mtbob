@@ -1,9 +1,4 @@
-{10}
----
-name=azertty
-hpMax=12.0
-shoot=true
-flight=true
+{8}
 ---
 name=dsds
 hpMax=156.0
@@ -13,11 +8,6 @@ flight=true
 name=BFB
 hpMax=231.0
 shoot=true
----
-name=qqq
-hpMax=12.0
-shoot=true
-flight=true
 ---
 name=dssss
 hpMax=156.0
@@ -41,9 +31,7 @@ flight=true
 name=BFBTRTRRE
 hpMax=231.0
 shoot=true
----name=vincent
-hpMax=32.0
-shoot=true
-ss=true
-flight=true
+---
+name=
+hpMax=0.0
 ---

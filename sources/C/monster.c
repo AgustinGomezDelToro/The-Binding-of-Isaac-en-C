@@ -258,11 +258,11 @@ void deleteMonster()
 
     getline(&line, &len, f);
     sscanf(line, "name=%s\n", monsters[i]->nameItem);
-    free(line);
+    // free(line);
 
     getline(&line, &len, f);
     sscanf(line, "hpMax=%f\n", &(monsters[i]->hpMax));
-    free(line);
+    // free(line);
 
     for (int j = 0; j < 4; j++)
     {
@@ -270,7 +270,7 @@ void deleteMonster()
       if (strcmp(line, "---\n") == 0)
       {
         printf("Je suis la\n");
-        free(line);
+        // free(line);
         break;
       }
       if (sscanf(line, "shoot=%s\n", bool))
@@ -285,7 +285,7 @@ void deleteMonster()
       {
         monsters[i]->flight = strcmp("true", bool) == 0;
       }
-      free(line);
+      // free(line);
     }
   }
 
