@@ -27,5 +27,8 @@ void printAllMonster();
 
 int foundMonster(char nameItem[20]);
 
+Monster* randomMonster();
+
+
 
 #endif

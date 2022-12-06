@@ -23,9 +23,10 @@ void monsterMain(){
             printf("3 - Supprimer un monstre\n");
             printf("4 - Afficher tous les monstres\n");
             printf("5 - Quitter\n");
+            printf("6 - Générer un monstre aléatoire\n");
             printf("Faites votre choix et appuyé sur entrer : ");
             scanf("%d",&choice);
-        }while(choice<=0 || choice>5);
+        }while(choice<=0 || choice>6);
 
         switch (choice) {
             case 1:
@@ -51,6 +52,12 @@ void monsterMain(){
             case 5:
                 system("clear");
                 choice = -1;
+                break;
+            case 6:
+                system("clear");
+                Monster* f = randomMonster();
+                printMonster(f);
+                freeMonster(f);
                 break;
         }
     }

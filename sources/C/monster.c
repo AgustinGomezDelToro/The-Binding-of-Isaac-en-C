@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #define FILE_1 "ressources/monster.mtbob"
 #define TEMP_FILE "ressources/monster_temp.mtbob"
@@ -502,4 +503,48 @@ int foundMonster(char nameItem[20])
   fclose(f);
   freeMonster(monster_temp);
   return 0;
+}
+
+
+Monster* randomMonster() {
+  FILE* f = fopen(FILE_1,"r");
+    int nbItems = 0;
+    char bool[5];
+    Monster *monster_temp = malloc(sizeof(Monster));
+    fscanf(f, "{%d}\n", &nbItems);
+    srand(time(NULL));
+    int random = 1 + rand() % nbItems; //on choisit un nombre aléatoire entre 0 et le nombre d'objets
+    for (int i = 0; i < random; i += 1 ) {
+        monster_temp->hpMax = 0;
+        monster_temp->shoot = 0;
+        monster_temp->ss = 0;
+        monster_temp->flight = 0;
+        fflush(stdin);
+        fscanf(f, "---\n");
+        fscanf(f, "name=%s\n", monster_temp->nameItem);
+        fscanf(f, "hpMax=%f\n", &monster_temp->hpMax);
+        if(fscanf(f, "shoot=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                monster_temp->shoot = 1;
+            } else {
+                monster_temp->shoot = 0;
+            }
+        }
+        if(fscanf(f, "ss=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                monster_temp->ss = 1;
+            } else {
+                monster_temp->ss = 0;
+            }
+        }
+        if(fscanf(f, "flight=%s\n", bool)) {
+            if (strcmp(bool, "true") == 0) {
+                monster_temp->flight = 1;
+            } else {
+                monster_temp->flight = 0;
+            }
+        }
+    }
+    fclose(f);
+    return monster_temp;
 }

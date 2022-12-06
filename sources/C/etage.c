@@ -183,7 +183,3 @@ int randomDirections(){
     //printf("Position: %s\n",sortie);
     return id;
 }
-
-void randomMonster(Piece* p){
-
-}
