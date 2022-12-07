@@ -15,11 +15,14 @@ int main(int argc, char const *argv[]){
     while (choice != -1)
     {
         do{
+            printf("********************************************************\n");
+            printf("**************** The Binding of Briatte ****************\n");
+            printf("********************************************************\n\n");
             //system("clear");
             printf("1 - Interface des Pieces\n");
             printf("2 - Interfaces des Items\n");
             printf("3 - Interfaces des monstres\n");
-            printf("4 - Générer un étage\n");
+            printf("4 - JOUER\n");
             printf("5 - Fermer le programme\n");
             printf("Faites votre choix et appuyé sur entrer : ");
             scanf("%d",&choice);

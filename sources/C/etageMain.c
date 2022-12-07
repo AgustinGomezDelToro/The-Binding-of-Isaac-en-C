@@ -52,7 +52,7 @@ void etageMain(){
                 if(toAdd->piece[coor[0]][coor[1]] == ' '){
 
                     toAdd->piece[coor[0]][coor[1]] = 'M';
-                    printf("%d %d\n",coor[0],coor[1]);
+                    //printf("%d %d\n",coor[0],coor[1]);
                     j+=1;
                 }
             }
@@ -64,9 +64,9 @@ void etageMain(){
     // Maintenant, on va recupérer et mettre en mémoire les salles qui on été tirer au sort    
     //On affiche l'etage + ses informations
     printEtage(e);
-    // for (int i = 0; i < 14; i+=1)
-    // {
-    //     printPiece(tabPieces[i],0);
-    // }
+    for (int i = 0; i < 14; i+=1)
+    {
+        printPiece(tabPieces[i],0);
+    }
     freeEtage(e);
 }
