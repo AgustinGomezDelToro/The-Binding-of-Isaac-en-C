@@ -1,4 +1,4 @@
-{8}
+{9}
 ---
 name=dsds
 hpMax=156.0
@@ -32,6 +32,10 @@ name=BFBTRTRRE
 hpMax=231.0
 shoot=true
 ---
-name=
-hpMax=0.0
+name=hpMax=0.0
+---
+name=a
+hpMax=100.0
+shoot=true
+flight=true
 ---

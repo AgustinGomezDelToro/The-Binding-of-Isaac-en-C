@@ -16,7 +16,6 @@
 #define FILE_1 "ressources/item.itbob"
 #define TEMP_FILE "ressources/item_temp.itbob"
 
-
 /// \def Création d'un objet
 /// \return un pointeur sur l'objet créé
 Item* createItem() {
@@ -29,7 +28,7 @@ Item* createItem() {
     do { //on demande à l'utilisateur le bonus de l'objet
         printf("\nEntrer le bonus de point de vie (compris entre 0 et 1000) : ");
         a->hpMax=checkFloat(); //on vérifie que l'utilisateur a bien saisi un nombre
-    } while(a->hpMax < 0 || a->hpMax > 1000); //on vérifie que le bonus est compris entre 0 et 1000
+    } while(a->hpMax < 1 || a->hpMax > 1000); //on vérifie que le bonus est compris entre 0 et 1000
     do {
         printf("\nEntrer le bonus d'armure (compris entre -100 et 100) : ");
         a->shield = checkFloat();
@@ -320,43 +319,34 @@ void printAllItem() {
 /// \def Ajout d'un objet dans le fichier
 /// \param a L'objet à ajouter
 void addItemToFile(Item* a, char* file) {
-    char save[100000];
     FILE* f = fopen(file,"r+"); //ouverture du fichier item.itbob
-    
-    if (fgetc(f) == EOF)
-  {
+    char save[10000];
+
+    if (fgetc(f) == EOF) {
+        rewind(f);
+        fprintf(f, "{0}\n---\n");
+    }
     rewind(f);
-    fprintf(f, "{0}\n---\n");
-  }
-    rewind(f);
-    
+
     int nbItems = 0;
-    fscanf(f, "{%d}\n", &nbItems);
+    fscanf(f, "{%d}\n", &nbItems); // on récupère le nombre de monstres
     rewind(f);
-
-  if (nbItems == 9)
-  {
-    printf("We are inside\n");
-    int c;
-    int i;
-    for (i = 0; (c = getc(f)) != EOF; i++)
-    {
-      save[i] = c;
+    if (nbItems == 9) { //On gère le cas lorsque le fichier est plein et qu'on veut rajouter un 10ème objet
+        int c;
+        int i;
+        for (i = 0; (c = getc(f)) != EOF; i += 1) { // on récupère le contenu du fichier dans le tableau save
+            save[i] = c;
+        }
+        for (int j = i; j > 0; j--) { //on décale le contenu du fichier de 1 caractère vers la droite
+            save[j] = save[j - 1];
+        }
+        rewind(f);
+        for (int j = 0; j <= i; j++) { //on réécrit le contenu du fichier avec le décalage
+            fputc(save[j], f);
+        }
+        rewind(f);
     }
-    for (int j = i; j > 0; j--)
-    {
-      save[j] = save[j - 1];
-    }
-    rewind(f);
-    for (int j = 0; j <= i; j++)
-    {
-      fputc(save[j], f);
-    }
-    rewind(f);
-  }
-
-  fprintf(f, "{%d}", nbItems);
-
+    fprintf(f, "{%d}", nbItems);
     if (f != NULL) {
         fseek(f,0, SEEK_END); //on se place à la fin du fichier
         if(ftell(f) == 0) {  //Premier passage ici si le fichier est vide
@@ -419,6 +409,7 @@ void addItemToFile(Item* a, char* file) {
     }
     fclose(f);
 }
+
 /// \def Recherche si un objet existe dans le fichier
 /// \param a L'objet à rechercher
 /// \return 1 si l'objet existe, 0 sinon

@@ -60,11 +60,9 @@ ps=true
 ss=true
 flight=true
 ---
-name=CHAMPION
-hpMax=432.0
+name=a
+hpMax=103.0
 shield=1.0
-dmg=1.0
 ps=true
-ss=true
 flight=true
 ---

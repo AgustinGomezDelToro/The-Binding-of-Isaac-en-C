@@ -11,12 +11,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void monsterMain(){
+void monsterMain() {
     int choice = 0;
     char* file = "ressources/monster.mtbob";
     system("clear");
-    while (choice != -1)
-    {
+    while (choice != -1) {
         do{
             printf("1 - Créer un monstre\n");
             printf("2 - Modifier un monstre\n");

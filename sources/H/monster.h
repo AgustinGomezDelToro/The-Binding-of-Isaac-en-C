@@ -2,7 +2,7 @@
 #define MONSTER_H
 
 struct Monster {
-    char nameItem[20];
+    char nameMonster[20];
     float hpMax;
     int shoot; //bool pour les tirs
     int ss; //bool pour les tirs spectrals
@@ -28,7 +28,5 @@ void printAllMonster();
 int foundMonster(char nameItem[20]);
 
 Monster* randomMonster();
-
-
 
 #endif
