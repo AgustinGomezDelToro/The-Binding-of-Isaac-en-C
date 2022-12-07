@@ -7,9 +7,47 @@
 */
 
 #include "../H/gameFunction.h"
+#include "../H/piece.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
 
+int kbhit(void)
+{
+  struct termios oldt, newt;
+  int ch;
+  int oldf;
+
+  tcgetattr(STDIN_FILENO, &oldt);
+  newt = oldt;
+  newt.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+  ch = getchar();
+
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+  fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+  if(ch != EOF)
+  {
+    ungetc(ch, stdin);
+    return 1;
+  }
+
+  return 0;
+}
+
+// int main(void)
+// {
+//   while(!kbhit())
+//     puts("Press a key!");
+//   printf("You pressed '%c'!\n", getchar());
+//   return 0;
+// }
 
 void selecPlayer(){
     int choice = 0;
@@ -43,5 +81,48 @@ void selecPlayer(){
                 system("clear");
                 return;
         }
+    }
+}
+
+void launchGame(Etage* etage,int lastX,int lastY){
+    Piece* actu = etage->piece[10];
+    int jeu = 1;
+    actu->piece[lastY][lastX] = 'P';
+    while (jeu!=0)
+    {
+        printPiece(etage->piece[10],0);
+        char dir = ' ';
+
+        while (!kbhit())
+        {
+        }
+
+        dir = getchar();
+        if(dir=='Z' || dir=='z' && actu->piece[lastY -1][lastX] != 'W' || actu->piece[lastY -1][lastX] == 'D'){
+            actu->piece[lastY][lastX] = ' ';
+            lastY = lastY - 1;
+            actu->piece[lastY][lastX] = 'P';
+            etage->piece[10] = actu;
+        }else if (dir=='Q' || dir=='q' && actu->piece[lastY][lastX -1] == ' ')
+        {
+            actu->piece[lastY][lastX] = ' ';
+            lastX = lastX -1;
+            actu->piece[lastY][lastX] = 'P';
+            etage->piece[10] = actu;
+        }else if (dir=='S' || dir=='s' && actu->piece[lastY+1][lastX] == ' ')
+        {
+            actu->piece[lastY][lastX] = ' ';
+            lastY = lastY+1;
+            actu->piece[lastY][lastX] = 'P';
+            etage->piece[10] = actu;
+         }else if (dir=='D' || dir=='d' && actu->piece[lastY][lastX+1] == ' ')
+         {
+            actu->piece[lastY][lastX] = ' ';
+            lastX = lastX + 1;
+            actu->piece[lastY][lastX] = 'P';
+            etage->piece[10] = actu;
+        }
+        system("clear");
+        
     }
 }

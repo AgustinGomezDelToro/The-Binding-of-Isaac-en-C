@@ -9,10 +9,14 @@ void game(){
     selecPlayer();
 
     Etage* etage = etageMain();
+    Piece *test = createPiece();
+    
+    int x = test->width/2;
+    int y = test->height/2;
 
-    printEtage(etage);
-    for (int i = 0; i < 14; i+=1)
-    {
-        printPiece(etage->piece[i],0);
-    }
+    int lastX=0;
+    int lastY=0;
+    launchGame(etage,x,y);
+    system("clear");
+    
 }
