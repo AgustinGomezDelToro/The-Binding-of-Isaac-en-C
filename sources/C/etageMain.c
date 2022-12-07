@@ -7,7 +7,7 @@
 #include "../H/item.h"
 #include "../H/monster.h"
 
-void etageMain(){
+Etage* etageMain(){
     //Piece* pieces = getAllPieces(); // Nous servira peut-être plus tard pour mettre en mémoire toutes les pieces.
     int nbrSalles = getNumberPieces();
 
@@ -19,28 +19,28 @@ void etageMain(){
 
     placerSalles(e);   // On affiche l'étage
 
-    Piece* tabPieces[14] = {}; // Tableau de pieces de la salle
+    //Piece* tabPieces[14] = {}; // Tableau de pieces de la salle
 
     for(int i =0; i<14; i+=1){
         if(e->Idsalles[i] == -1){
             Piece* spawner = createPiece();
-            tabPieces[i] = spawner;
+            e->piece[i] = spawner;
         }else if (e->Idsalles[i] == -2)
         {
             Piece *itemRoom = createPiece();
             itemRoom->piece[itemRoom->height/2][itemRoom->width/2] = 'I';
             Item * iR = randomItem();
-            tabPieces[i] = itemRoom;
+            e->piece[i] = itemRoom;
         }else if (e->Idsalles[i] == -3)
         {
             Piece* boss = createPiece();
-            tabPieces[i] = boss;
+            e->piece[i] = boss;
         }else if (e->Idsalles[i] == -4)
         {
             Piece* itemRoomBonus = createPiece();
             itemRoomBonus->piece[itemRoomBonus->height/2][itemRoomBonus->width/2] = 'I';
             Item * iR = randomItem();
-            tabPieces[i] = itemRoomBonus;
+            e->piece[i] = itemRoomBonus;
         }else{
             Piece* toAdd = getPiece(e->Idsalles[i]);
             int j = 0;
@@ -56,7 +56,7 @@ void etageMain(){
                     j+=1;
                 }
             }
-            tabPieces[i] = toAdd;
+            e->piece[i] = toAdd;
             //printPiece(toAdd,0);
         }
     }
@@ -66,7 +66,8 @@ void etageMain(){
     printEtage(e);
     for (int i = 0; i < 14; i+=1)
     {
-        printPiece(tabPieces[i],0);
+        printPiece(e->piece[i],0);
     }
-    freeEtage(e);
+    //freeEtage(e);
+    return e;
 }

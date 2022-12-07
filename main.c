@@ -7,6 +7,7 @@
 */
 
 #include "sources/H/menu.h"
+#include "sources/H/game.h"
 #include <stdlib.h>
 #include <stdio.h>
 int main(int argc, char const *argv[]){
@@ -38,7 +39,7 @@ int main(int argc, char const *argv[]){
                 monsterMain(); //Partie d'Agustin
                 break;
             case 4:
-                etageMain();
+                game();
                 break;
             case 5:
                 choice = -1;

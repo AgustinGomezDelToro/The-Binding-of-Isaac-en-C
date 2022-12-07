@@ -11,6 +11,7 @@ struct Etage {
     int** etage;
     int width;
     int height;
+    Piece** piece;
 };
 
 typedef struct Etage Etage;

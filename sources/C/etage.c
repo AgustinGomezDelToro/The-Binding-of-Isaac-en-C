@@ -24,6 +24,7 @@ Etage *createMap()
         }
     }
     e->Idsalles = malloc(sizeof(int) * 14);
+    e->piece = malloc(sizeof(Piece) * 14);
     return e;
 }
 
