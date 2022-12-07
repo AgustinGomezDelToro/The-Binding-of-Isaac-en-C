@@ -62,12 +62,5 @@ Etage* etageMain(){
     }
 
     // Maintenant, on va recupérer et mettre en mémoire les salles qui on été tirer au sort    
-    //On affiche l'etage + ses informations
-    printEtage(e);
-    for (int i = 0; i < 14; i+=1)
-    {
-        printPiece(e->piece[i],0);
-    }
-    //freeEtage(e);
     return e;
 }

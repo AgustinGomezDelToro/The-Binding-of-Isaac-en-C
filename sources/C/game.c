@@ -3,8 +3,11 @@
 #include "../H/game.h"
 #include "../H/etage.h"
 #include "../H/menu.h"
+#include "../H/gameFunction.h"
 
 void game(){
+    selecPlayer();
+
     Etage* etage = etageMain();
 
     printEtage(etage);
