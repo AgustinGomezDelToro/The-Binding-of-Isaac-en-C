@@ -8,11 +8,13 @@
 
 #include "../H/gameFunction.h"
 #include "../H/piece.h"
+#include "../H/item.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+
 
 int kbhit(void)
 {
@@ -64,22 +66,22 @@ void selecPlayer(){
             printf("3 - Hennou 6 hpMax | 2 dmg\n");
             printf("4 - Revenir a l'écran principale\n");
             printf("Faites votre choix et appuyé sur entrer : ");
-            scanf("%d",&choice);
+            choice = checkInt();
         }while(choice<=0 || choice>4);
         switch (choice) {
             case 1:
                 system("clear");
-                return;
+                break;
             case 2:
                 system("clear");
-                return;
+                break;
             case 3:
                 system("clear");
-                return;
+                break;
             case 4:
                 choice = -1;
                 system("clear");
-                return;
+                break;
         }
     }
 }

@@ -8,11 +8,12 @@
 
 #include "../H/piece.h"
 #include "../H/menu.h"
+#include "../H/item.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 void pieceMain(){
-    char choice = '0';
+    int choice = 0;
     char *file = "ressources/piece.rtbob";
     system("clear");
     while(choice != -1) {
@@ -25,25 +26,24 @@ void pieceMain(){
             printf("4 - Afficher toutes les pièce\n");
             printf("5 - Quitter\n");
             printf("Faites votre choix et appuyé sur entrer : ");
-            getchar();
-            scanf("%c", &choice);
-        } while (choice <= '0' || choice > '5');
+            choice = checkInt();
+        } while (choice <= 0 || choice > 5);
         int id = 0;
         switch (choice) {
-            case '1': 
+            case 1:
                 system("clear");
                 Piece *a = createPiece();
                 addPieceToFile(a, file);
                 freePiece(a);
                 break;
-            case '2':
+            case 2:
                 system("clear");
                 printAllPieces();
                 printf("Entrer l'id de la salle a modifier : ");
                 scanf("%d", &id);
                 modifyPiece(id);
                 break;
-            case '3':
+            case 3:
                 system("clear");
                 id = 0;
                 printAllPieces();
@@ -51,12 +51,12 @@ void pieceMain(){
                 scanf("%d", &id);
                 deletePiece(id);
                 break;
-            case '4':
+            case 4:
                 system("clear");
                 printAllPieces();
                 printf("\n\n");
                 break;
-            case '5':
+            case 5:
                 system("clear");
                 choice = -1;
                 break;

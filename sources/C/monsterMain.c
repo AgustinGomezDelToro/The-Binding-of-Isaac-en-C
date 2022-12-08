@@ -8,6 +8,7 @@
 
 #include "../H/monster.h"
 #include "../H/menu.h"
+#include "../H/item.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -23,7 +24,7 @@ void monsterMain() {
             printf("4 - Afficher tous les monstres\n");
             printf("5 - Quitter\n");
             printf("Faites votre choix et appuyé sur entrer : ");
-            scanf("%d",&choice);
+            choice = checkInt();
         }while(choice<=0 || choice>5);
 
         switch (choice) {

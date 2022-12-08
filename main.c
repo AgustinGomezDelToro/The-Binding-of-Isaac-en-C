@@ -8,6 +8,7 @@
 
 #include "sources/H/menu.h"
 #include "sources/H/game.h"
+#include "sources/H/item.h"
 #include <stdlib.h>
 #include <stdio.h>
 int main(int argc, char const *argv[]){
@@ -26,7 +27,7 @@ int main(int argc, char const *argv[]){
             printf("4 - JOUER\n");
             printf("5 - Fermer le programme\n");
             printf("Faites votre choix et appuyé sur entrer : ");
-            scanf("%d",&choice);
+            choice = checkInt();
         }while(choice<=0 || choice>5);
         switch (choice) {
             case 1:
