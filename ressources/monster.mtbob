@@ -1,4 +1,4 @@
-{9}
+{10}
 ---
 name=dsds
 hpMax=156.0
@@ -37,5 +37,9 @@ name=hpMax=0.0
 name=a
 hpMax=100.0
 shoot=true
+flight=true
+---
+name=po
+hpMax=102.0
 flight=true
 ---
